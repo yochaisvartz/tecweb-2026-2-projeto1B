@@ -3,22 +3,11 @@
 
 {% block content %}
 <div class="appbar">
-  <img class="logo" src="{% static 'notes/img/logo-getit.png' %}" alt="Logo Get-it" />
-  <span class="subtitle">Como o Post-it, mas com outro verbo</span>
-  <a class="btn btn-secondary" href="{% url 'tags' %}">Tags</a>
+  <a class="btn btn-secondary" href="{% url 'tags' %}">Voltar</a>
+  <span class="subtitle">Notas com a tag: {{ tag.name }}</span>
 </div>
 
 <div class="container">
-  <div class="form-card">
-    <form method="post">
-      {% csrf_token %}
-      <input class="form-card-title" type="text" name="titulo" placeholder="Título" required />
-      <textarea class="autoresize" name="detalhes" placeholder="Detalhes"></textarea>
-      <input class="form-card-title" type="text" name="tag" placeholder="Tag (opcional)" />
-      <button class="btn" type="submit">Adicionar Nota</button>
-    </form>
-  </div>
-
   <div class="card-container">
     {% for note in notes %}
     <div class="card">
@@ -46,11 +35,11 @@
       </div>
       <div class="card-content">
         <p>{{ note.content }}</p>
-        {% if note.tag %}
-        <a class="tag" href="{% url 'tag_detail' note.tag.id %}">#{{ note.tag.name }}</a>
-        {% endif %}
+        <a class="tag" href="{% url 'tag_detail' tag.id %}">#{{ tag.name }}</a>
       </div>
     </div>
+    {% empty %}
+    <p>Nenhuma anotação possui esta tag.</p>
     {% endfor %}
   </div>
 </div>

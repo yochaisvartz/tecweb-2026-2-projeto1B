@@ -1,0 +1,43 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="appbar">
+  <img class="logo" src="{% static 'notes/img/logo-getit.png' %}" alt="Logo Get-it" />
+  <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+  <a class="btn btn-secondary" href="{% url 'index' %}">Voltar</a>
+</div>
+
+<div class="container">
+  <div class="tags-card">
+    <h1>Todas as tags</h1>
+    <table class="tags-table">
+      <thead>
+        <tr>
+          <th>TAG</th>
+          <th>ANOTAÇÕES</th>
+        </tr>
+      </thead>
+      <tbody>
+    {% for tag in tags %}
+        <tr>
+          <td><a class="tag" href="{% url 'tag_detail' tag.id %}">#{{ tag.name }}</a></td>
+          <td>
+            <a class="tag-notes-link" href="{% url 'tag_detail' tag.id %}" aria-label="Ver anotações com a tag {{ tag.name }}" title="Ver anotações">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+            </a>
+          </td>
+        </tr>
+    {% empty %}
+        <tr>
+          <td colspan="2">Nenhuma tag cadastrada.</td>
+        </tr>
+    {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

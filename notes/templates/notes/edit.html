@@ -1,0 +1,23 @@
+{% extends "notes/base.html" %}
+
+{% block content %}
+<div class="appbar">
+  <a class="btn btn-secondary" href="{% url 'index' %}">Voltar</a>
+  <span class="subtitle">Editar anotação</span>
+</div>
+
+<div class="container">
+  <div class="form-card edit-card">
+    <form method="post">
+      {% csrf_token %}
+      <input class="form-card-title" type="text" name="titulo" value="{{ note.title }}" placeholder="Título" required />
+      <textarea class="autoresize" name="detalhes" placeholder="Detalhes">{{ note.content|default_if_none:"" }}</textarea>
+      <input class="form-card-title" type="text" name="tag" value="{{ note.tag.name|default_if_none:"" }}" placeholder="Tag (opcional)" />
+      <div class="form-actions">
+        <a class="btn btn-secondary" href="{% url 'index' %}">Cancelar</a>
+        <button class="btn" type="submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
