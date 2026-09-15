@@ -12,7 +12,7 @@
       {% csrf_token %}
       <input class="form-card-title" type="text" name="titulo" value="{{ note.title }}" placeholder="Título" required />
       <textarea class="autoresize" name="detalhes" placeholder="Detalhes">{{ note.content|default_if_none:"" }}</textarea>
-      <input class="form-card-title" type="text" name="tag" value="{{ note.tag.name|default_if_none:"" }}" placeholder="Tag (opcional)" />
+      <input class="form-card-title" type="text" name="tag" value="{{ tag_value }}" placeholder="Tags (opcional, separadas por vírgula)" />
       <div class="form-actions">
         <a class="btn btn-secondary" href="{% url 'index' %}">Cancelar</a>
         <button class="btn" type="submit">Salvar</button>

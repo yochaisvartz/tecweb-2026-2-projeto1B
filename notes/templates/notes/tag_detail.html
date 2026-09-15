@@ -35,7 +35,11 @@
       </div>
       <div class="card-content">
         <p>{{ note.content }}</p>
-        <a class="tag" href="{% url 'tag_detail' tag.id %}">#{{ tag.name }}</a>
+        <div class="tags-list">
+          {% for note_tag in note.tags.all %}
+          <a class="tag" href="{% url 'tag_detail' note_tag.id %}">#{{ note_tag.name }}</a>
+          {% endfor %}
+        </div>
       </div>
     </div>
     {% empty %}
